@@ -21,8 +21,8 @@ int main(void)
 				putchar(k + '0');
 				if (i + j + k != 24)
 				{
-					putchar(',');
-					putchar(' ');
+				putchar(',');
+				putchar(' ');
 				}
 			}
 		}
