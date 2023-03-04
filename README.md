@@ -1,1 +1,1 @@
-0x02. C - Functions, nested loops readme
+my debugging readme
