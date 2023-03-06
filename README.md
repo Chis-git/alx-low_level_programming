@@ -1,1 +1,1 @@
-my first of 0x05-pointers_arrays_strings readme
+my first 0x06. C - More pointers, arrays and strings readme
