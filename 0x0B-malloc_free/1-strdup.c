@@ -2,42 +2,32 @@
 #include <stdlib.h>
 
 /**
- * *string_nconcat - concates n bytes of a string to another string
- * @s1: string to append to
- * @s2: string to concatenate from
- * @n: number of bytes from s2 to concatenate to s1
- * Return: pointer to the resulting string
+ * _strdup - Duplicate a string
+ * @str: the string to duplicate
+ *
+ * Return: the string duplicated
  */
-char *string_nconcat(char *s1, char *s2, unsigned int n)
-{
-	char *p;
-	unsigned int size1 = 0, size2 = 0, i;
 
-	if (s1 == NULL)
-		s1 = " ";
-	if (s2 == NULL)
-		s2 = " ";
-	while (s1[size1] != '\0')
+char *_strdup(char *str)
+{
+	int a = 0, i = 1;
+	char *s;
+
+	if (str == NULL)
+		return (NULL);
+	while (str[i])
 	{
-		size1++;
+		i++;
 	}
-	while (s2[size2] != '\0')
+	s = malloc((sizeof(char) * i));
+	if (s == NULL)
+	return (NULL);
+
+	while (a < i)
 	{
-		size2++;
+	s[a] = str[a];
+	a++;
 	}
-	if (n > size2)
-		n = size2;
-	p = malloc((size1 + n + 1) * sizeof(char));
-	if (p == NULL)
-	return (0);
-	for (i = 0; i < size1; i++)
-	{
-		p[i] = s1[i];
-	}
-	for (; i < (size1 + n); i++)
-	{
-		p[i] = s2[i - size1];
-	}
-	p[i] = '\0';
-	return (p);
+	s[a] = '\0';
+	return (s);
 }
