@@ -1,24 +1,44 @@
 #include "main.h"
-#include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
- * _calloc - allocated memoria for nweb elemn de size bytes
- * @nmemb: number of element in the array
- * @size: bytes for each position in array
- * Return: pointer void
+ * str_concat - Concatenates two strings of any size
+ * @s1: the first string to concatenate
+ * @s2: the second string to concatenate
+ *
+ * Return: the two strings concatenated
  */
-void *_calloc(unsigned int nmemb, unsigned int size)
-{
-	char *p;
-	unsigned int i;
 
-	if (nmemb == 0 || size == 0)
-		return (NULL);
-	p = malloc(nmemb * size);
-	if (p == NULL)
-		return (NULL);
-	for (i = 0; i < nmemb * size; i++)
-		p[i] = 0;
-	return (p);
+char *str_concat(char *s1, char *s2)
+{
+	int i = 0, j = 0, k = 0, l = 0;
+	char *s;
+
+	if (s1 == NULL)
+		s1 = "";
+	if (s2 == NULL)
+		s2 = "";
+	while (s1[i])
+		i++;
+	while (s2[j])
+		j++;
+	l = i + j;
+	s = malloc((sizeof(char) * l) + 1);
+	if (s == NULL)
+	return (NULL);
+	j = 0;
+	while (k < l)
+	{
+	if (k <= i)
+	s[k] = s1[k];
+	if (k >= i)
+	{
+	s[k] = s2[j];
+	j++;
+	}
+	k++;
+	}
+	s[k] = '\0';
+	return (s);
 }
