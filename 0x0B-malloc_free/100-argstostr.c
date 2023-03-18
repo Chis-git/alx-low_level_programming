@@ -1,37 +1,48 @@
 #include "main.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 /**
- * _realloc - reallocates a memory block using malloc and free
- * @ptr: pointer
- * @old_size: old size
- * @new_size: new size
- * Return: pointer
+ * argstostr - Convert the params passed to the programs to string
+ * @ac: the argument count
+ * @av: the argument vector
+ *
+ * Return: ...
  */
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
-{
-	char *clone, *realloc;
-	unsigned int i;
 
-	if (ptr != NULL)
-		clone = ptr;
-	else
+char *argstostr(int ac, char **av)
+{
+	int ch = 0, i = 0, j = 0, k = 0;
+	char *s;
+
+	if (ac == 0 || av == NULL)
+		return (NULL);
+	while (i < ac)
 	{
-		return (malloc(new_size));
+		while (av[i][j])
+		{
+			ch++;
+			j++;
+		}
+		j = 0;
+		i++;
 	}
-	if (new_size == old_size)
-		return (ptr);
-	if (new_size == 0 && ptr != NULL)
+	s = malloc((sizeof(char) * ch) + ac + 1);
+	i = 0;
+	while (av[i])
 	{
-		free(ptr);
-		return (0);
+		while (av[i][j])
+		{
+			s[k] = av[i][j];
+			k++;
+			j++;
+		}
+		s[k] = '\n';
+		j = 0;
+		k++;
+		i++;
 	}
-	relloc = malloc(new_size);
-	if (relloc == NULL)
-		return (0);
-	for (i = 0; i < (old_size || i < new_size); i++)
-	{
-		*(relloc + i) = clone[i];
-	}
-	free(ptr);
-	return (relloc);
+	k++;
+	s[k] = '\0';
+	return (s);
 }
