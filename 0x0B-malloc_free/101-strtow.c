@@ -1,35 +1,84 @@
 #include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
 
-/**
- * main - multiplies two positive numbers
- * @argc: n arguments
- * @argv: args
- * Return: int
- */
-int main(int argc, char *argv[])
-{
-	unsigned long mul;
-	int i, j;
+int world_len(char *str);
+int count_words(char *str);
+char **strtow(char *str);
 
-	if (argc != 3)
+/**
+ * word_len - Locates the index marking the end of the first word contained within a string.
+ * @str: the stringto be searched.
+ * Return: the index marking the end of the initial word pointed to by str.
+ */
+int Word_len(char *str)
+{
+	int index = 0, len = 0;
+
+	while (*(str + index) && *(str + index) != ' ')
 	{
-		printf("Error\n");
-		exit(98);
-	for (i = 1; i < argc; i++)
+		len++;
+		index++;
+	}
+		return (len);
+}
+/**
+ * Count_words - Counts the number of words contained within a string.
+ * @str: The string to be searched.
+ * Return: The number of words contained within str.
+ */
+int count_words(char *str)
+{
+	int index = 0, words = 0, len = 0;
+
+	for (index = 0; *(str + index); index++)
+		len++;
+	for (index = 0; index < len; index++)
 	{
-		for (j = 0; argv[i][j] != '\0'; j++)
+		if (*(str + index) != ' ')
 		{
-			if (argv[i][j] > 57 || argv[i][j] < 48)
-			{
-				printf("Error\n");
-				exit (98);
-			}
+			words++;
+			index += Word_len(str + index);
 		}
 	}
-	mul = atol(argv[1]) * atol(argv[2]);
-	printf("%lu\n", mul);
+	return (words);
+}
+
+/**
+ * strtow - splits a string into words.
+ * @str: The string to be splits.
+ * Return: If str = NULL, str = "", or the function fails - NULL. otherwise a point to an array of strings (words)
+ */
+
+char **strtow(char *str)
+{
+	char **strings;
+	int index = 0, words, w, letters, l;
+
+	if (str == NULL || str[0] == '\0')
+		return (NULL);
+	words = count_words(str);
+	if (words == 0)
+		return (NULL);
+	strings = malloc(sizeof(char *) * (words + 1));
+	if (strings == NULL)
+		return (NULL);
+	for (w = 0; w < words; w++)
+	{
+		while (str[index] == ' ')
+			index++;
+		letters = Word_len(str + index);
+		strings[w] = malloc(sizeof(char) * (letters + 1));
+		if (strings[w] == NULL)
+		{
+			for (; w >= 0; w--)
+				free(strings[w]);
+			free(strings);
+			return (NULL);
+		}
+		for (l = 0; l < letters; l++)
+			strings[w][l] = str[index++];
+		strings[w][l] = '\0';
 	}
-	return (0);
+	strings[w] = NULL;
+	return (strings);
 }
